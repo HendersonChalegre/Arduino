@@ -1,0 +1,19 @@
+// Acionando Led com fotoresistor
+void setup()
+{
+  pinMode(A0, INPUT);
+  pinMode(2, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int sensorValue = analogRead(A0);
+  if(sensorValue >10){
+    digitalWrite(2, HIGH);
+  } else {
+    digitalWrite(2, LOW);
+  }
+  Serial.println(sensorValue);
+  delay(1000);
+}

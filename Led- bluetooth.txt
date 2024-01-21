@@ -1,0 +1,39 @@
+//TX = 10
+//RX = 11
+//Led = 2
+
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(11, 10); // RX, TX
+
+void setup() {
+  Serial.begin(9600);
+  mySerial.begin(9600);
+  pinMode(2, OUTPUT);
+
+  // Enviar cadena UTF-8 desde Arduino a otro dispositivo
+  mySerial.println("¡Hola, mundo! 👋🌍");
+}
+
+void loop() {
+  // Leer cadena UTF-8 desde otro dispositivo
+  if (mySerial.available()) {
+    String receivedData = mySerial.readString();
+    
+    if(receivedData == "ligar"){
+      digitalWrite(2, HIGH);
+    } else if (receivedData == "desligar") {
+       digitalWrite(2, LOW);
+    } else{
+
+      mySerial.println("Invalido");
+    }
+
+    
+
+    // Imprimir la cadena UTF-8 en el puerto serial principal
+    Serial.println("Datos recibidos: " + receivedData);
+    
+  }
+}
